@@ -5,6 +5,49 @@ from __future__ import unicode_literals
 from django.db import migrations
 
 
+def set_movie_data(apps, schema_editor):
+    # import movie data and use it to set fields in Movie class
+    Movie = apps.get_model("movierating", "Movie")
+    with open('u.item', encoding='latin1') as movieinformation:
+        information_table = movieinformation.read()
+    # id|title|releasedate|videodate|imdb|un|act|adv|ani|child|com|crim|doc
+    # drama|fant|f-noir|horror|mus|mys|rom|syfy|thril|war|west|
+    information_list = information_table.split('\n')
+    inforow_list = []
+    for row in information_list:
+        row_list = row.split('|')
+        if row_list[0] != '':
+            inforow_list.append(row_list)
+    for row in inforow_list:
+        Movie.objects.create(movie_id=row[0], movie_name=row[1], release_date=row[2], video_release=row[3], imdb_link=row[4], unknown=row[5], action=row[6], adventure=row[7], animation=row[8], childrens=row[9], comedy=row[10], crime=row[11], documentary=row[12], drama=row[14], fantasy=row[15], filmnoir=row[16], war=row[17], western=row[18])
+    print("Movie function void of error")
+
+
+def set_rater_data(apps, schema_editor):
+    # import data and assign it to fields in Rater class
+    Rater = apps.get_model("movierating", "Rater")
+    with open("u.user", encoding="latin1") as userinformation:
+        user_table = userinformation.read()
+    # userid | age | gender | occupation | zip code
+    user_list = user_table.split('\n')
+    final_userlist = []
+    for row in user_list:
+        row_list = row.split('|')
+        if row_list[0] != '':
+            final_userlist.append(row_list)
+    for row in final_userlist:
+        Rater.obects.create(userid=row[0], age=row[1], gender=row[2], occupation=row[3], zipcode=row[4])
+    print('User function void of error')
+
+
+def set_movie_ratings_data(apps, schema_editor):
+    # import data and use it to assign fields in Ratings class
+    Rating = apps.get_model("movierating", "Rating")
+    with open("u.data", encoding="latin1") as movieratings:
+        ratings_table = movieratings.read()
+    # user id | item id | rating | timestamp
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
