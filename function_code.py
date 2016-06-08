@@ -1,3 +1,9 @@
+"""
+This is test code written outside of the schema files as a means to test
+the logic and syntax for creating the lists without worrying about it
+affecting anything or being lost.
+"""
+
 # code to open and sort movie ratings list
 with open("u.data", encoding="latin1") as movieratings:
     ratings_table = movieratings.read()

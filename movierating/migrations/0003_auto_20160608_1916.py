@@ -56,7 +56,6 @@ def set_movie_ratings_data(apps, schema_editor):
         user_id = Rater.objects.get(userid=row[0])
         movie_id = Movie.objects.get(movieid=row[0])
         Rating.objects.create(rater=user_id, movie=movie_id, rating=row[2], timestamp=row[3])
-    raise Exception('Rating migtration succesfull.')
 
 
 class Migration(migrations.Migration):
