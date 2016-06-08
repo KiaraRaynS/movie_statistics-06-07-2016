@@ -23,6 +23,9 @@ class Movie(models.Model):
     war = models.IntegerField(default=0)
     western = models.IntegerField(default=0)
 
+    def __str__(self):
+        return(self.movie_name)
+
 
 class Rater(models.Model):
     userid = models.IntegerField(default=0)
@@ -30,6 +33,9 @@ class Rater(models.Model):
     gender = models.CharField(max_length=1, default="g")
     occupation = models.CharField(max_length=20, default="occupation")
     zipcode = models.CharField(max_length=15, default="zipcode")
+
+    def __str__(self):
+        return(self.userid)
 
 
 class Rating(models.Model):
