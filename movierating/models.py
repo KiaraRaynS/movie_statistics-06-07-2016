@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Movie(models.Model):
-    movie_id = models.IntegerField(default=0)
+    movieid = models.IntegerField(default=0)
     movie_name = models.CharField(max_length=30, default='name')
     release_date = models.CharField(max_length=15, default='date')
     video_release = models.CharField(max_length=20, null=True)
@@ -23,25 +23,17 @@ class Movie(models.Model):
     war = models.IntegerField(default=0)
     western = models.IntegerField(default=0)
 
-    def __str__(self):
-        movie_str = "Movie name: {}".format(self.movie_name)
-        return(movie_str)
-
 
 class Rater(models.Model):
     userid = models.IntegerField(default=0)
     age = models.IntegerField(default=0)
     gender = models.CharField(max_length=1, default="g")
     occupation = models.CharField(max_length=20, default="occupation")
-    zipcode = models.IntegerField(default=0)
-
-    def __str__(self):
-        rater_str = "{}, {}, {}".format(self.userid, self.age, self.gender)
-        return rater_str
+    zipcode = models.CharField(max_length=15, default="zipcode")
 
 
 class Rating(models.Model):
-    userid = models.ForeignKey(Rater)
-    movieid = models.ForeignKey(Movie)
+    rater = models.ForeignKey(Rater)
+    movie = models.ForeignKey(Movie)
     rating = models.IntegerField(default=1)
     timestamp = models.IntegerField(default=1)

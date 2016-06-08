@@ -20,8 +20,6 @@ for row in information_list:
     row_list = row.split('|')
     if row_list[0] != '':
         inforow_list.append(row_list)
-for row in inforow_list:
-    print(row[12])
 
 # code to open and sort user information
 with open("u.user", encoding="latin1") as userinformation:
@@ -33,4 +31,5 @@ for row in user_list:
     row_list = row.split('|')
     if row_list[0] != '':
         finaluser_list.append(row_list)
-raise Exception("Process void of error")
+for row in finaluser_list:
+    print(row[4])
